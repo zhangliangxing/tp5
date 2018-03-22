@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" >
+<title>牛逼视频网</title>
+
+<link rel="stylesheet" href="/static/index/css/videoCT.css">
+<link rel="stylesheet" href="/static/index/css/style.css">
+<!-- <link rel="stylesheet" href="index.css"> -->
+<link href="/static/index/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- pop-up -->
+<!-- <link href="/static/index/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" /> -->
+
+<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/static/index/css/pinlun.css" />
+<link href="/static/index/css/font-awesome.css" rel="stylesheet"> 
+<script type='text/javascript' src="/static/index/js/jquery.min.js"></script>
+<script type='text/javascript' src="/static/index/js/videoCT.js"></script>
+<script src="/static/index/js/main.js"></script>
+<!-- <script src="/static/index/js/jquery-1.11.1.min.js"></script> -->
+<!-- <script type='text/javascript' src="/static/index/js/index.js"></script> -->
+
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          box-sizing: border-box;
+        }
+        section {
+          position: fixed;
+          width: 1000px;
+          height: 600px;
+          float:left;
+          margin-top: 70px;
+          margin-left: 50px;
+          /*right: 0;*/
+          /*bottom: 0;*/
+          /*margin: auto;*/
+        }
+
+    </style>
+</head>
+ <body style="position:relative;">
+  <!--  <script src="/demos/googlegg.js"></script> -->
+<!-- <div class="first"> -->
+                 <div class="inner-header-agile" style="background:red;">   
+                            <nav class="navbar navbar-default">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <h1><a  href="index.html"><span>牛逼</span>视频网</a></h1>
+                                </div>
+                                <!-- navbar-header -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav navbar-nav">
+                                        <li class="dropdown-toggle"><a href="index">首页</a></li>
+                                        <!--遍历大板块-->
+                                        {if !empty($result)}
+                                        {foreach $result as $value}
+
+                                            <li class="dropdown">
+                                                <a href="/index/index/slist?bid={$value['bid']}&pid={$value['pid']}" class="dropdown-toggle" data-toggle="dropdown">{$value['classname']}<b class="caret"></b></a>
+                                                <ul class="dropdown-menu multi-column columns-2" style="width:80px;background:pink;">
+                                                    <li>
+                                                    <div>
+                                                        <ul class="multi-column-dropdown">
+                                                            {foreach $rel as $val}
+                                                            {if $value['bid'] == $val['pid']}
+                                                            <li><a href="/index/index/list?bid={$val['bid']}">{$val['classname']}</a></li>
+                                                            {/if}
+                                                            {/foreach}
+                                                        </ul>
+                                                    </div>
+                        
+                                                    
+                                                    <div class="clearfix"></div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        {/foreach}
+                                        {/if}
+                                    </ul>
+
+                                </div>
+                        <div class="clearfix"> </div>   
+                        </nav>
+                            <div class="w3ls_search">
+                                    <div class="cd-main-header">
+                                        <ul class="cd-header-buttons">
+                                            <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="cd-search" class="cd-search">
+                                        <form action="#" method="post">
+                                            <input name="Search" type="search" placeholder="Search...">
+                                        </form>
+                                    </div>
+                            </div>
+                    </div> 
+
+              <div class="w3_agilits_banner_bootm">
+                 <div class="w3_agilits_inner_bottom">
+                        <div class="col-md-6 wthree_agile_login">
+                             <ul>
+                                    <!-- <li><i class="fa fa-phone" aria-hidden="true"></i> (+000) 009 455 4088</li> -->
+                                    {if empty($username)}
+                                    <li><a href="/index/user/login" class="login">登录</a></li>
+                                    <li><a href="/index/user/register" class="login reg">注册</a></li>
+                                    <li><a href="/index/user/found" class="login reg">忘记密码</a></li>
+                                    <li><a href="/index/user/bofang" class="login reg">播放</a></li>
+                                    <li><a href="/index/index/header" class="login reg">头部</a></li>
+                                    {else if}
+                                    <li><a href="#" class="login">{$username}</a></li>
+                                    <li><a href="/index/user/set" class="login reg">个人中心</a></li>
+                                    <li><a href="/index/user/exit" class="login reg">退出</a></li>
+                                    {/if}
+                                </ul>
+                        </div>
+
+                </div>
+            </div>
+<section style="position:absolute;">
+    <video width="100%" height="100%" id="video1" style="width:700px;height:500px;"></video>
+</section>
+    <div style="width:100%;height:70px;">
+            <div style="width:100%;height:70px;line-height:70px;"><span style="float:left;margin-left:100px;font-size:40px;color:green"><i>您正在观看</i></span><span style="color:red;font-size:20px;">&nbsp;&nbsp;-->>{$dname}</span><span style="color:#0f0;font-size:20px;">&nbsp;&nbsp;-->>{$bname}</span><span style="color:#f90;font-size:20px;">&nbsp;&nbsp;-->>{$title}</span></div>
+    </div>
+    <div style="width:100%;height:820px;">
+         <div class="list leftlist" style="width:230px;height:521px;float:right;margin-right:80px;margin-top:50px;">
+            <div style="width:228px;height:40px;border-bottom:1px solid #999; float:left;">
+               <p style="font-size:20px;margin-left:0px;color:#555;">热门排行榜</p>
+            </div>
+     
+            <ul style="float:left;margin-top:20px;padding-left:18px;">
+                {if !empty($ress)}
+                {foreach $ress as $key => $value}
+                <li class="hot" style="border-bottom:1px solid #999;width:228px;height:40px;-background:#ccc;list-style: none;">
+                    <span class="orderby" style="font-size:16px;display:inline-block;background:#ccc;color:white;width:20px;height:20px;text-align:center;line-height:20px;font-size:12px;" >{$key}</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <font color="#F90" style="font-size:16px;">
+                        <font color='#66B3FF'>{$value['title']}</font>&nbsp;&nbsp;&nbsp;&nbsp;高清</font>
+                    
+                </li>
+                {/foreach}
+                {/if}
+            </ul>
+        </div>
+        <div style="width:1000px;height:50px;float:left;margin-top:600px;background:#ccc;margin-left:50px;">
+            <div style="width:1000px;height:50px;background:pink;float:left;margin-top:0px;">
+                <div id="bdshare" class="bdshare_t bds_tools_32     get-codes-bdshare">
+                            <a class="bds_tsina"></a >
+                            <a class="bds_qzone"></a >
+                            <a class="bds_tqq"></a >
+                            <a class="bds_renren"></a >
+                            <span class="bds_more"></span>
+                </div>
+                <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+                <script type="text/javascript" id="bdshell_js"></script> 
+                <script type="text/javascript">
+                    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+                </script> 
+                <div style="width:500px;height:50px;background:green;float:right;">
+                    <span style="line-height:50px;text-align:center;font-size:20px;">已经被<i style="color:red;font-size:30px;">{$count}</i>人点赞&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index/index/zan?id={$id}" style="font-size:30px;font-weight:bold;">赞</a></span>
+                </div>
+
+            </div>
+            <div style="width:1000px;height:150px;background:#0f0;">
+                <form action="/index/idea/pinlun?id={$id}" method="post">
+                    <textarea style="width:1000px;height:120px;border:1px solid black;;border-radius:15px;"  name="ping" placeholder="看完了感觉怎么样，留下点什么吧"> 
+                    </textarea>
+                    <input type="submit"value="发表评论" style="float:right;background:#ccc;">
+                </form>
+            
+            </div>
+        </div>
+        
+    </div>
+    <div style="width:100%;">
+        <div style="width:1000px;background:pink;float:left;margin-left:50px;">
+            <div class="about">
+              <ul>
+                <div id="fountainG">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </div>
+              {if !empty($all)}
+              {foreach $all as $val}
+                <div class="about_girl"><span><a href="/"><img src="{$val['picture']}"></a></span>
+                  <p><i style="color:pink;">发布者：{$val['username']} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布于：{$val['addtime']}</i><br /><b>{$val['content']}</b><br /></p>
+                  <form action="/index/idea/return?pid={$val['uid']}&hid={$val['id']}&id={$val['sid']}" method="post"> 
+                        <textarea name="hui" style="border:1px solid green;float:left;width:200px;height:70px;margin-top:30px;border-radius:15px;"></textarea>
+                        <input type="submit" name="" value="回复" style="background:#0f0;float:left;margin-top:75px;border-radius:10px;">
+                  </form> 
+                </div>
+             {foreach $ell as $vel}
+            {if $val['uid'] == $vel['pid'] && $val['sid'] == $vel['sid']}
+           
+                <div class="about_boy"><span><a href="/"><img src="{$vel['picture']}"></a></span>
+                  <p>回复:{$val['username']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><i style="color:green;">{$vel['content']}</i><br />回复者： {$vel['username']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布于：{$vel['addtime']}<br /></p>
+                  <form action="/index/idea/return?pid={$vel['uid']}&hid={$vel['id']}&id={$vel['sid']}" method="post"> 
+                        <textarea name="hui" style="border:1px solid green;float:left;width:200px;height:70px;margin-left:130px;margin-top:30px;border-radius:15px;"></textarea>
+                        <input type="submit" name="" value="回复" style="background:#0f0;float:left;margin-top:-25px;margin-left:95px;border-radius:10px;">
+                  </form> 
+                </div>
+                {foreach $rll as $rel}
+                {if $vel['id'] == $rel['hid']}
+                <div class="about_boy"><span><a href="/"><img src="{$rel['picture']}"></a></span>
+                  <p>回复:{$vel['username']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><i style="color:green;">{$rel['content']}</i><br />回复者： {$rel['username']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布于：{$rel['addtime']}<br /></p>
+                </div>
+                {/if}
+                {/foreach}
+                {/if}
+            {/foreach}
+            
+            {/foreach}
+            {/if}
+                
+              </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+    
+            <script>
+                $(document).ready(function(){
+                    $(".dropdown").hover(            
+                        function() {
+                            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+                            $(this).toggleClass('open');        
+                        },
+                        function() {
+                            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+                            $(this).toggleClass('open');       
+                        }
+                    );
+                });
+            </script>
+            <script>
+    'user strict';
+
+    window.onload = function () {
+
+        //初始化
+        var video = $('#video1').videoCt({
+            title: '动画',              //标题
+            volume: 0.2,                //音量
+            barrage: true,              //弹幕开关
+            comment: true,              //弹幕
+            reversal: true,             //镜像翻转
+            playSpeed: true,            //播放速度
+            update: true,               //下载
+            autoplay: false,            //自动播放
+            clarity: {
+                type: ['360P','480P'],            //清晰度
+                src: ['http://p3fczj25n.bkt.clouddn.com/6.MP4',
+                      'http://p3fczj25n.bkt.clouddn.com/6.MP4']      //链接地址
+            },
+            commentFile: 'comment.json'           //导入弹幕json数据
+        });
+
+        //扩展
+        video.title;                    //标题
+        video.status;                   //状态
+        video.currentTime;              //当前时长
+        video.duration;                 //总时长
+        video.volume;                   //音量
+        video.clarityType;              //清晰度
+        video.claritySrc;               //链接地址
+        video.fullScreen;               //全屏
+        video.reversal;                 //镜像翻转
+        video.playSpeed;                //播放速度
+        video.cutover;                  //切换下个视频是否自动播放
+        video.commentTitle;             //弹幕标题
+        video.commentId;                //弹幕id
+        video.commentClass;             //弹幕类型
+        video.commentSwitch;            //弹幕是否打开
+        $('#video1').bind('ended', function() {
+            console.log('弹幕json数据：\n'+ video.comment());              //获取弹幕json数据
+        });
+    }
+</script>
+</html>

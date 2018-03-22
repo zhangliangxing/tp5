@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>
+            X-admin v1.0
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="/static/admin/css/x-admin.css" media="all">
+    </head>
+
+    <body>
+        <div class="x-body">
+            <form action="" method="post" class="layui-form layui-form-pane">
+                <div class="layui-form-item">
+                    <label for="name" class="layui-form-label">
+                        <span class="x-red">*</span>角色名
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="hidden" name="rid" value="{$rid}">
+                        <input type="text" id="name" name="name" required="" lay-verify="required" value="{$name}"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">
+                        拥有权限
+                    </label>
+                    <table  class="layui-table layui-input-block">
+                        <tbody>
+                        {if !empty($roles)}
+                        {foreach $roles as $k=>$v}
+                            {if $v['level']==2}
+                            <tr>
+                                <td>
+                                    {$v['name']}
+                                </td>
+                                <td>
+                                    <div class="layui-input-block">
+                                        {foreach $roles as $k=>$val}
+                                        {if $val['pid']==$v['nid']}
+                                        <input name="id[]" {if in_array($val['nid'],$nid)}checked{/if} type="checkbox" value="{$val['nid']}" /> {$val['name']}
+                                        {/if}
+                                        {/foreach}
+                                    </div>
+                                </td>
+                            </tr>
+                            {/if}
+                        {/foreach}
+                        {/if}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label for="desc" class="layui-form-label">
+                        描述
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea">{$desc}</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                <button class="layui-btn" lay-submit="" lay-filter="save">保存</button>
+              </div>
+            </form>
+        </div>
+        <script src="/static/admin/lib/layui/layui.js" charset="utf-8">
+        </script>
+        <script src="/static/admin/js/x-layui.js" charset="utf-8">
+        </script>
+        <script>
+            layui.use(['form','layer'], function(){
+                $ = layui.jquery;
+              var form = layui.form()
+              ,layer = layui.layer;
+
+              //监听提交
+              form.on('submit(save)', function(data){
+                // console.log(data);
+                var id = [];
+                for(var i = 0;i<$('input').size();i++){
+                    if($('input').eq(i).is(':checked')){
+                        id.push($('input').eq(i).val());
+                    }
+                }
+                //发异步，把数据提交给php
+                var rid = $('[name=rid]').val();
+                var name = $('[name=name]').val();
+                var desc = $('[name=desc]').val();
+                $.ajax({
+                    type:'post',
+                    url:'/admin/root/updrole',
+                    data:{nid:id,rid:rid,name:name,desc:desc},
+                    dataType:'json',
+                    success:success
+                });
+                function success(data){
+                     console.log(data);
+                    if (data.state == 1){
+                        layer.alert("修改成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            // 刷新父页面
+                            window.location.href='/admin/root/adminrole';
+                        });
+                    }
+                }
+                return false;
+              });
+            });
+        </script>
+        <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,12 @@
+/* ::::: http://xcdn.php.cn/js/banner/jQuery%20Banner%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC%E5%88%87%E6%8D%A2%E7%89%B9%E6%95%88/css/teachers.css ::::: */
+
+.teachers_banner { width: 100%; height: 575px; background: rgba(0, 0, 0, 0) url('teachers_banner.jpg') no-repeat scroll center top / cover ; position: relative; overflow: hidden; }
+.teachers_b { position: relative; margin-top: 130px; }
+#slide { margin: 0px auto; width: 760px; height: 330px; position: relative; }
+#slide li { position: absolute; width: 760px; display: flex; align-items: flex-start; background: rgb(255, 255, 255) none repeat scroll 0% 0%; overflow: hidden; box-shadow: 0px 0px 20px rgb(29, 55, 77); }
+#slide li img { width: 100%; height: 100%; }
+.arrow {  }
+.arrow .prev, .arrow .next { position: absolute; width: 64px; top: 38%; z-index: 9; font: 700 96px "simsun"; opacity: 0.3; color: rgb(255, 255, 255); cursor: pointer; }
+.arrow .prev { left: -220px; }
+.arrow .next { right: -220px; }
+.arrow .prev:hover, .arrow .next:hover { color: rgb(0, 160, 233); opacity: 0.7; }

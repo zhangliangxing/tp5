@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" >
+<title>牛逼视频网</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- IE兼容模式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<!-- <link rel="stylesheet" href="/static/index/css/style.css"> -->
+<!--头部-->
+<!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" /> -->
+<!-- pop-up -->
+<link href="/static/index/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/static/index/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/static/index/css/zoomslider.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="/static/index/css/styletwo.css" /> -->
+ <!--猜你喜欢-->
+<script type='text/javascript' src="/static/index/js/jquery.min.js"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link rel="stylesheet" href="/static/index/css/teachers.css">
+<script src="/static/index/js/jquery-1.7.2.min.js"></script>
+<script src="/static/index/js/main.js"></script>
+<!-- <script type="text/javascript" src="/static/index/js/modernizr-2.6.2.min.js"></script> -->
+<!-- <script src="/static/index/js/main.js"></script> -->
+</head>
+ <body style="position:relative;">
+  <!--  <script src="/demos/googlegg.js"></script> -->
+<!-- <div class="first"> -->
+                    <div class="demo-inner-content">
+        <!--/header-w3l-->
+               <div class="header-w3-agileits" id="home">
+                 <div class="inner-header-agile" style="background:red;">   
+                            <nav class="navbar navbar-default">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <h1><a  href="index.html"><span>牛逼</span>视频网</a></h1>
+                                </div>
+                                <!-- navbar-header -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav navbar-nav">
+                                        <li class="dropdown-toggle"><a href="index">首页</a></li>
+                                        <!--遍历大板块-->
+                                        {if !empty($result)}
+                                        {foreach $result as $value}
+
+                                            <li class="dropdown">
+                                                <a href="/index/index/slist?bid={$value['bid']}&pid={$value['pid']}" class="dropdown-toggle" data-toggle="dropdown">{$value['classname']}<b class="caret"></b></a>
+                                                <ul class="dropdown-menu multi-column columns-2" style="width:80px;background:pink;">
+                                                    <li>
+                                                    <div>
+                                                        <ul class="multi-column-dropdown">
+                                                            {foreach $rel as $val}
+                                                            {if $value['bid'] == $val['pid']}
+                                                            <li><a href="/index/index/list?bid={$val['bid']}">{$val['classname']}</a></li>
+                                                            {/if}
+                                                            {/foreach}
+                                                        </ul>
+                                                    </div>
+                        
+                                                    
+                                                    <div class="clearfix"></div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        {/foreach}
+                                        {/if}
+                                    </ul>
+
+                                </div>
+                        <div class="clearfix"> </div>   
+                        </nav>
+                            <div class="w3ls_search">
+                                    <div class="cd-main-header">
+                                        <ul class="cd-header-buttons">
+                                            <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="cd-search" class="cd-search">
+                                        <form action="/index/index/search" method="post">
+                                            <input name="Search" type="search" placeholder="Search...">
+                                        </form>
+                                    </div>
+                            </div>
+                    </div> 
+               </div>
+        </div>
+            <!-- <script src="/demos/googlegg.js"></script> -->
+<div  class="teachers_banner">
+    <div class="container clearfix teachers_b">
+        <div class="slide" id="slide">
+{foreach $ress as $vel}
+            <ul>
+                
+                <li><a href="/index/index/bofang?id={$vel['id']}"><img src="{$vel['picture']}" alt="林奇涵" title="{$vel['title']}"></a> </li>
+                <!-- <li> <img src="/static/index/images/three.jpg" alt="易星晨" title="qeqweqweqwe"> </li>
+                <li> <img src="/static/index/images/four.jpg" alt="曾海阳"  title=""> </li>
+                <li> <img src="/static/index/images/five.jpg" alt="狄俊祺"  title=""> </li>
+                <li> <img src="/static/index/images/six.jpg" alt="仲颖鸣" title="" /> </li>
+                <li> <img src="/static/index/images/seven.jpg" alt="徐晓磊" title="" /> </li> -->
+               
+            </ul>
+            <div class="arrow">
+                <div class="prev"><</div>
+                <div class="next">></div>
+            </div> 
+            {/foreach}
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        /*图片位置数据*/
+        var datas = [
+            {'z-index': 6, opacity: 1, width: 760, height: 330, top: 40, left: 0},
+            {'z-index': 4, opacity: 0.6, width: 560, height: 243, top:80, left: -225},
+            {'z-index': 3, opacity: 0.4, width: 480, height: 203, top: -10, left: -170},
+            {'z-index': 2, opacity: 0.2, width: 620, height: 269, top: -60, left: 110},
+            {'z-index': 3, opacity: 0.4, width: 480, height: 203,  top: -10, left: 430},
+            {'z-index': 4, opacity: 0.6, width: 560, height: 243, top: 80, left: 420},
+        ]
+        move();
+
+        function move() {
+            /*图片分布*/
+            for (var i = 0; i < datas.length; i++) {
+                var data = datas[i];
+                $('#slide ul li').eq(i).css('z-index',data['z-index']);
+                $('#slide ul li').eq(i).stop().animate(data, 1200);
+            }
+        }
+
+        /*左箭头事件*/
+        $('.prev').on('click', function () {
+            var last = datas.pop();
+            datas.unshift(last);
+
+            move();
+        })
+
+        /*右箭头事件处理函数*/
+        function nextYewu(){
+            var first = datas.shift();
+            datas.push(first);
+            move();
+        }
+        /*右箭头事件*/
+        $('.next').on('click', nextYewu);
+
+        /*自动播放*/
+        var timer = setInterval(function(){
+            nextYewu();
+        },4000);
+        /*鼠标进入slide显示箭头,清除自动播放*/
+        $('#slide').on({
+            mouseenter: function () {
+                $('.arrow').css('display', 'block');
+                clearInterval(timer);
+            }, mouseleave: function () {
+                $('.arrow').css('display', 'none');
+                /*鼠标离开时自动播放*/
+                clearInterval(timer);
+                timer = setInterval(function(){
+                    nextYewu();
+                },5000)
+            }
+        })
+        
+    })
+</script>
+              <div class="w3_agilits_banner_bootm">
+                 <div class="w3_agilits_inner_bottom">
+                        <div class="col-md-6 wthree_agile_login">
+                             <ul>
+                                    <!-- <li><i class="fa fa-phone" aria-hidden="true"></i> (+000) 009 455 4088</li> -->
+                                    {if empty($username)}
+                                    <li><a href="/index/user/login" class="login">登录</a></li>
+                                    <li><a href="/index/user/register" class="login reg">注册</a></li>
+                                    <li><a href="/index/user/found" class="login reg">忘记密码</a></li>
+                                    <li><a href="/index/user/bofang" class="login reg">播放</a></li>
+                                    <li><a href="/index/index/header" class="login reg">头部</a></li>
+                                    {else if}
+                                    <li><a href="#" class="login">{$username}</a></li>
+                                    <li><a href="/index/user/set" class="login reg">个人中心</a></li>
+                                    <li><a href="/index/user/exit" class="login reg">退出</a></li>
+                                    {/if}
+                                </ul>
+                        </div>
+
+                </div>
+            </div>
+
+                            <!--最新电影--> 
+                  <h3 class="agile_w3_title"> 猜你 <span>喜欢</span></h3>
+            <!--/movies-->              
+            <div class="w3_agile_latest_movies">
+            
+                <div id="owl-demo" class="owl-carousel owl-theme">
+                    {if !empty($rell)}
+                    {foreach $rell as $value}
+                    <div class="item">
+                        <div class="w3l-movie-gride-agile w3l-movie-gride-slider ">
+                            <a href="/index/index/bofang?id={$value['id']}&url={$value['url']}" class="hvr-sweep-to-bottom"><img src="{$value['picture']}" title="Movies Pro" class="img-responsive" alt=" " style="width:280px;height:330px;"/>
+                                <div class="w3l-action-icon"><i class="fa fa-play-circle-o" aria-hidden="true"></i></div>
+                            </a>
+                            <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                <div class="w3l-movie-text">
+                                    <h6><a href="/index/index/bofang?id={$value['id']}">{$value['title']}</a></h6>                          
+                                </div>
+                                <div class="mid-2 agile_mid_2_home">
+                                    <p>2016</p>
+                                    <div class="block-stars">
+                                        <ul class="w3l-ratings">
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="ribben one">
+                                <p>NEW</p>
+                            </div>
+                        </div>
+                    </div>
+                    {/foreach}
+                    {/if}
+
+                </div>
+            </div>
+            <h3 class="agile_w3_title">热度较高的 <span>影片</span> </h3>
+            
+                     <div class="wthree_agile-requested-movies">
+                                        {if !empty($ress)}
+                                        {foreach $ress as $vel}
+                                        <div class="col-md-2 w3l-movie-gride-agile requested-movies">
+                                                            <a href="/index/index/bofang?id={$vel['id']}" class="hvr-sweep-to-bottom"><img src="{$vel['picture']}" title="Movies Pro" class="img-responsive" alt=" " style="height:400px;">
+                                                                <div class="w3l-action-icon"><i class="fa fa-play-circle-o" aria-hidden="true"></i></div>
+                                                            </a>
+                                                                <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                                                    <div class="w3l-movie-text">
+                                                                        <h6><a href="/index/index/bofang?id={$vel['id']}">{$vel['title']}</a></h6>                          
+                                                                    </div>
+                                                                    <div class="mid-2 agile_mid_2_home">
+                                                                        <p>2016</p>
+                                                                        <div class="block-stars">
+                                                                            <ul class="w3l-ratings">
+                                                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                                                <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                                                <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                                                <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="clearfix"></div>
+                                                                    </div>
+                                                                </div>
+                                                            <div class="ribben one">
+                                                                <p>NEW</p>
+                                                            </div>
+                                        </div>
+                                        {/foreach}
+                                        {/if}
+                                    <div class="clearfix"></div> 
+
+                        </div>
+						<div style="text-align:center;">
+							<div class="pagination" style="clear: both;margin:0 auto;">
+	    					<div>
+	    						{$data2}
+	    					</div>
+   					    </div>
+						</div>
+            <div class="w3agile_footer_copy">
+                    <div>
+                        <ul>
+                            <li>hahahaha</li>
+                        </ul>
+                    </div>
+                    <p>© 2017 Movies Pro. All rights reserved | Design by <a href="">W3layouts</a></p>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $(".dropdown").hover(            
+                        function() {
+                            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+                            $(this).toggleClass('open');        
+                        },
+                        function() {
+                            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+                            $(this).toggleClass('open');       
+                        }
+                    );
+                });
+            </script>  
+
+
+            <link href="/static/index/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+<script src="/static/index/js/owl.carousel.js"></script>
+<script>
+    $(document).ready(function() { 
+        $("#owl-demo").owlCarousel({
+     
+         autoPlay: 3000, //Set AutoPlay to 3 seconds
+          autoPlay : true,
+           navigation :true,
+
+          items : 5,
+          itemsDesktop : [640,4],
+          itemsDesktopSmall : [414,3]
+     
+        });
+     
+    }); 
+         $(".pagination a").on("click", function() {
+          var page = $(this).attr("href");
+          getPage(page);
+          return false;
+     });
+     function getPage(url){
+	       $.get(url, function(result){
+	           $("body").html(result);
+	       });
+	}
+</script> 
+
+</html>

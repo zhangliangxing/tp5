@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            X-admin v1.0
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="/static/admin/css/x-admin.css" media="all">
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/ajax.js"></script>
+        <link href="/static/admin/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="x-nav">
+            <span class="layui-breadcrumb">
+                <a><cite>首页</cite></a>
+                <a><cite>会员管理</cite></a>
+                <a><cite>轮播列表</cite></a>
+            </span>
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
+        </div>
+        <div class="x-body">
+            <xblock>
+                <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
+                <a href="/admin/index/banneradd">
+                    <button class="layui-btn"><i class="layui-icon">&#xe608;</i>添加</button>
+                </a>
+                <span class="x-right" style="line-height:40px">共有数据：{$count} 条</span>
+            </xblock>
+            <table class="layui-table" id="table">
+                <thead>
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            缩略图
+                        </th>
+                        <th>
+                            名字
+                        </th>
+                        <th>
+                            描述
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="x-img">
+
+                </tbody>
+            </table>
+
+            <div style="text-align:center;">
+                <a class="fen" href="" style="text-decoration:none;display:inline-block;width:60px;height:30px;border:1px solid #2ec3e7;border-radius:5px;line-height:30px;text-align:center;">首页</a>
+                <a class="fen" href="" style="text-decoration:none;display:inline-block;width:60px;height:30px;border:1px solid #2ec3e7;border-radius:5px;line-height:30px;text-align:center;">上一页</a>
+                <a class="fen" href="" style="text-decoration:none;display:inline-block;width:60px;height:30px;border:1px solid #2ec3e7;border-radius:5px;line-height:30px;text-align:center;">下一页</a>
+                <a class="fen" href="" style="text-decoration:none;display:inline-block;width:60px;height:30px;border:1px solid #2ec3e7;border-radius:5px;line-height:30px;text-align:center;">尾页</a>
+            </div>
+        </div>
+        <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+        <script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+
+        <script>
+            var oTable = document.getElementById('table');
+            var aA = document.getElementsByClassName('fen');
+            ajax({
+                method:'get',
+                url:'/admin/index/show',
+                async:true,
+                data:{page:1},
+                success:success
+            });
+            function success(data){
+                //console.log(data);
+                var obj = JSON.parse(data);
+                // console.log(obj);
+                var i = obj.ret.length;
+                var str = '';
+                for(j=0;j<i;j++){
+
+                str += "<tr>"+
+                            "<td>"+
+                                    "<input type='checkbox' value='obj.ret[j].banid' name=''/>"
+                            +"</td>"+
+
+
+                            "<td class='banid'>"+
+                                 obj.ret[j].banid
+                            +"</td>"+
+
+
+                            "<td>"+
+                                "<img src="+obj.ret[j].pic+" style='width:100px;'/>"
+                            +"</td>"+
+                            "<td>"+
+                                obj.ret[j].name
+                            +"</td>"+
+                            "<td>"+
+                                obj.ret[j].info
+                            +"</td>"+
+
+
+                            "<td style='td-manage'>"+
+                                "<a title='删除' href='javascript:;' onclick='banner_del(this,"+obj.ret[j].banid+")'>"+
+                                    "<i class='layui-icon'>&#xe640;</i>"
+                                +"</a>"
+                            +"</td>"+
+                        +"</tr>";
+                }
+                $('tbody').html(str);
+
+                var oPage = obj.allpage;
+                var i = 0;
+                for (var name in oPage) {
+                    // console.log(name);
+                    aA[i].href = 'javascript:test(\'' +oPage[name] +'\')';
+                    i++;
+                }
+            }
+            function test(url)
+            {
+                ajax({
+                    method:'get',
+                    url:url,
+                    async:true,
+                    data:null,
+                    success:success
+                });
+            }
+        </script>
+
+
+        <script>
+            layui.use(['laydate','element','laypage','layer'], function(){
+            $ = layui.jquery;//jquery
+            laydate = layui.laydate;//日期插件
+            lement = layui.element();//面包导航
+            laypage = layui.laypage;//分页
+            layer = layui.layer;//弹出层
+
+              //以上模块根据需要引入
+
+                layer.ready(function(){ //为了layer.ext.js加载完毕再执行
+                  layer.photos({
+                    photos: '#x-img'
+                    //,shift: 5 //0-6的选择，指定弹出图片动画类型，默认随机
+                  });
+                });
+            });
+
+            //批量删除提交
+             function delAll () {
+                layer.confirm('确认要删除吗？',function(index){
+                    //捉到所有被选中的，发异步进行删除
+                    var id = [];
+                    for(var i = 0;i<$('input').size();i++){
+                        if($('input').eq(i).is(':checked')){
+                            id.push($('input').eq(i).val());
+                        }
+                    }
+                    //发异步删除数据
+                    $.ajax({
+                        type:'get',
+                        data:{all:id},
+                        url:'/admin/index/delall',
+                        dataType:'json',
+                        success:success
+                    });
+                    function success(data){
+                        var obj = JSON.parse(data);
+                        if (obj['state']==1){
+                            layer.alert("删除成功", {icon: 6},function () {
+                                // 刷新父页面
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+             /*添加*/
+            function banner_add(title,url,w,h){
+                x_admin_show(title,url,w,h);
+            }
+
+
+            /*删除*/
+            function banner_del(obj,id){
+                layer.confirm('确认要删除吗？',function(index){
+                    //发异步删除数据
+                    $.ajax({
+                        type:'get',
+                        data:{banid:id},
+                        url:'/admin/index/delbanner',
+                        dataType:'json',
+                        success:success
+                    });
+                    function success(data){
+                        //alert('删除成功');
+                    }
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                });
+            }
+            </script>
+            <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>

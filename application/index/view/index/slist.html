@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" >
+<title>牛逼视频网</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- IE兼容模式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<!-- <link rel="stylesheet" href="/static/index/css/style.css"> -->
+<!--头部-->
+<link href="/static/index/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/static/index/css/zoomslider.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="/static/index/css/styletwo.css" /> -->
+ <!--猜你喜欢-->
+<script type='text/javascript' src="/static/index/js/jquery.min.js"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link rel="stylesheet" href="/static/index/css/teachers.css">
+<script src="/static/index/js/jquery-1.7.2.min.js"></script>
+<script src="/static/index/js/main.js"></script>
+<!-- <script type="text/javascript" src="/static/index/js/modernizr-2.6.2.min.js"></script> -->
+<!-- <script src="/static/index/js/main.js"></script> -->
+</head>
+ <body style="position:relative;">
+  <!--  <script src="/demos/googlegg.js"></script> -->
+<!-- <div class="first"> -->
+                    <div class="demo-inner-content">
+        <!--/header-w3l-->
+               <div class="header-w3-agileits" id="home">
+                 <div class="inner-header-agile" style="background:red;">   
+                            <nav class="navbar navbar-default">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <h1><a  href="index.html"><span>牛逼</span>视频网</a></h1>
+                                </div>
+                                <!-- navbar-header -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav navbar-nav">
+                                        <li class="dropdown-toggle"><a href="index">首页</a></li>
+                                        <!--遍历大板块-->
+                                        {if !empty($result)}
+                                        {foreach $result as $value}
+
+                                            <li class="dropdown">
+                                                <a href="/index/index/slist?bid={$value['bid']}&pid={$value['pid']}" class="dropdown-toggle" data-toggle="dropdown">{$value['classname']}<b class="caret"></b></a>
+                                                <ul class="dropdown-menu multi-column columns-2" style="width:80px;background:pink;">
+                                                    <li>
+                                                    <div>
+                                                        <ul class="multi-column-dropdown">
+                                                            {foreach $rel as $val}
+                                                            {if $value['bid'] == $val['pid']}
+                                                            <li><a href="/index/index/list?bid={$val['bid']}">{$val['classname']}</a></li>
+                                                            {/if}
+                                                            {/foreach}
+                                                        </ul>
+                                                    </div>
+                        
+                                                    
+                                                    <div class="clearfix"></div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        {/foreach}
+                                        {/if}
+                                    </ul>
+
+                                </div>
+                        <div class="clearfix"> </div>   
+                        </nav>
+                            <div class="w3ls_search">
+                                    <div class="cd-main-header">
+                                        <ul class="cd-header-buttons">
+                                            <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="cd-search" class="cd-search">
+                                        <form action="#" method="post">
+                                            <input name="Search" type="search" placeholder="Search...">
+                                        </form>
+                                    </div>
+                            </div>
+                    </div> 
+               </div>
+        </div>
+              <div class="w3_agilits_banner_bootm">
+                 <div class="w3_agilits_inner_bottom">
+                        <div class="col-md-6 wthree_agile_login">
+                             <ul>
+                                    <!-- <li><i class="fa fa-phone" aria-hidden="true"></i> (+000) 009 455 4088</li> -->
+                                    {if empty($username)}
+                                    <li><a href="/index/user/login" class="login">登录</a></li>
+                                    <li><a href="/index/user/register" class="login reg">注册</a></li>
+                                    <li><a href="/index/user/found" class="login reg">忘记密码</a></li>
+                                    <li><a href="/index/user/bofang" class="login reg">播放</a></li>
+                                    <li><a href="/index/index/header" class="login reg">头部</a></li>
+                                    {else if}
+                                    <li><a href="#" class="login">{$username}</a></li>
+                                    <li><a href="/index/user/set" class="login reg">个人中心</a></li>
+                                    <li><a href="/index/user/exit" class="login reg">退出</a></li>
+                                    {/if}
+                                </ul>
+                        </div>
+
+                </div>
+            </div>
+            {if !empty($resl)}
+            {foreach $resl as $val}
+            <h3 class="agile_w3_title"><b style="font-size:50px;">您正在看</b>:<i>{$bigname}===>{$val['classname']}</i></h3>       
+                 <div class="wthree_agile-requested-movies">
+                                {foreach $small as $vel}
+                                {if $val['bid'] == $vel['bid']}
+                                        <div class="col-md-2 w3l-movie-gride-agile requested-movies">
+                                                            <a href="/index/index/bofang?id={$vel['id']}" class="hvr-sweep-to-bottom"><img src="{$vel['picture']}" title="Movies Pro" class="img-responsive" alt=" " style="height:400px;>
+                                                                <div class="w3l-action-icon"><i class="fa fa-play-circle-o" aria-hidden="true"></i></div>
+                                                            </a>
+                                                                <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                                                    <div class="w3l-movie-text">
+                                                                        <h6><a href="/index/index/bofang?id={$vel['id']}">{$vel['title']}</a></h6>                          
+                                                                    </div>
+                                                                    <div class="mid-2 agile_mid_2_home">
+                                                                        <p>2016</p>
+                                                                        <div class="block-stars">
+                                                                            <ul class="w3l-ratings">
+                                                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                                                <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                                                <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                                                <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="clearfix"></div>
+                                                                    </div>
+                                                                </div>
+                                                            <div class="ribben one">
+                                                                <p>NEW</p>
+                                                            </div>
+                                        </div>
+                                {/if}
+                                {/foreach}
+                        <div class="clearfix"></div> 
+                </div>
+                {/foreach}
+                {/if}
+            <div class="w3agile_footer_copy">
+                    <div>
+                        <ul>
+                            <li>hahahaha</li>
+                        </ul>
+                    </div>
+                    <p>© 2017 Movies Pro. All rights reserved | Design by <a href="">W3layouts</a></p>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $(".dropdown").hover(            
+                        function() {
+                            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+                            $(this).toggleClass('open');        
+                        },
+                        function() {
+                            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+                            $(this).toggleClass('open');       
+                        }
+                    );
+                });
+            </script>  
+
+
+            <link href="/static/index/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+<script src="/static/index/js/owl.carousel.js"></script>
+<script>
+    $(document).ready(function() { 
+        $("#owl-demo").owlCarousel({
+     
+         autoPlay: 3000, //Set AutoPlay to 3 seconds
+          autoPlay : true,
+           navigation :true,
+
+          items : 5,
+          itemsDesktop : [640,4],
+          itemsDesktopSmall : [414,3]
+     
+        });
+     
+    }); 
+</script> 
+
+</html>

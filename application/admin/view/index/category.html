@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            X-admin v1.0
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="/static/admin/css/x-admin.css" media="all">
+        <script type="text/javascript" src="/static/admin/js/ajax.js"></script>
+    </head>
+    <body>
+        <div class="x-nav">
+            <span class="layui-breadcrumb">
+              <a><cite>首页</cite></a>
+              <a><cite>会员管理</cite></a>
+              <a><cite>分类管理</cite></a>
+            </span>
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
+        </div>
+        <div class="x-body">
+            <form class="layui-form x-center" action="" style="width:50%">
+                <div class="layui-form-pane" style="margin-top: 15px;">
+                  <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:60px">所属分类</label>
+                    <div class="layui-input-inline" style="width:120px;text-align: left">
+                        <select name="pid">
+                            <option value="0">顶级分类</option>
+                            {foreach $result as $k=>$v}
+                            <option value="{$v['bid']}">{if $v['pid']==0}{$v['classname']}{else}--{$v['classname']}{/if}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="layui-input-inline" style="width:120px">
+                        <input type="text" name="name"  placeholder="分类名" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-input-inline" style="width:80px">
+                        <button class="layui-btn"  lay-submit="" lay-filter="add"><i class="layui-icon">&#xe608;</i>增加</button>
+                    </div>
+                  </div>
+                </div>
+            </form>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><span class="x-right" style="line-height:40px">共有数据：{$count} 条</span></xblock>
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            分类名
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="x-link">
+                    {foreach $result as $k=>$v}
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="{$v['bid']}" name="">
+                        </td>
+                        <td>{$v['bid']}</td>
+                        <td id="td">
+                            <p class="p1">{if $v['pid']==0}{$v['classname']}{else}——{$v['classname']}{/if}</p>
+                        </td>
+                        <td class="td-manage">
+                            <a title="删除" href="javascript:;" onclick="cate_del(this,'{$v['bid']}')"
+                            style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+        <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+        <script src="/static/admin/js/x-layui.js" charset="utf-8"></script>
+        <script>
+            layui.use(['element','layer','form'], function(){
+                $ = layui.jquery;//jquery
+              lement = layui.element();//面包导航
+              layer = layui.layer;//弹出层
+              form = layui.form();
+
+              //监听提交
+              form.on('submit(add)', function(data){
+                //console.log(data);
+                //发异步，把数据提交给php
+                var pid = $('[name=pid]').val();
+                var name = $('[name=name]').val();
+                $.ajax({
+                    type:'post',
+                    url:'/admin/index/addblock',
+                    data:{name:name,pid:pid},
+                    dataType:'json',
+                    success:success
+                });
+                function success(data){
+                    var obj = JSON.parse(data);
+                    if (obj['state']==1){
+                        layer.alert("增加成功", {icon: 6},function () {
+                            window.location.reload();
+                        });
+                    }else {
+                        layer.alert("已有该板块，增加失败", {icon: 5},function () {
+                            window.location.reload();
+                        });
+                    }
+                }
+                /*layer.alert("增加成功", {icon: 6});
+                $('#x-link').prepend('<tr><td><input type="checkbox"value="1"name=""></td><td>1</td><td>1</td><td>'+data.field.name+'</td><td class="td-manage"><a title="编辑"href="javascript:;"onclick="cate_edit(\'编辑\',\'cate-edit.html\',\'4\',\'\',\'510\')"class="ml-5"style="text-decoration:none"><i class="layui-icon">&#xe642;</i></a><a title="删除"href="javascript:;"onclick="cate_del(this,\'1\')"style="text-decoration:none"><i class="layui-icon">&#xe640;</i></a></td></tr>');*/
+                return false;
+              });
+
+
+            })
+
+
+
+
+            //批量删除提交
+             function delAll () {
+                layer.confirm('确认要删除吗？',function(index){
+                    //捉到所有被选中的，发异步进行删除
+                    var id = [];
+                    for(var i = 0;i<$('input').size();i++){
+                        if($('input').eq(i).is(':checked')){
+                            id.push($('input').eq(i).val());
+                        }
+                    }
+                    //发异步删除数据
+                    $.ajax({
+                        type:'get',
+                        data:{all:id},
+                        url:'/admin/index/delblocks',
+                        dataType:'json',
+                        success:success
+                    });
+                    function success(data){
+                        var obj = JSON.parse(data);
+                        if (obj['state']==1){
+                            layer.alert("删除成功", {icon: 6},function () {
+                                // 刷新父页面
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+             }
+
+
+            // 双击修改
+            var lock = true;
+            var aa = document.getElementsByClassName('p1');
+            for (var i=0;i<aa.length;i++){
+                aa[i].ondblclick = function (){
+                    if (!lock){
+                        return;
+                    }
+                    lock = false;
+                    var tdText = this.innerHTML;
+                    var newInput = document.createElement('input');
+                    newInput.type='text';
+                    newInput.style.width = '150px';
+                    newInput.style.padding = '0px';
+                    newInput.className = 'tdinput';
+                    // 清空他的值
+                    this.innerHTML = '';
+                    // 放入原来的值
+                    newInput.value = tdText;
+                    // 将input框放进去
+                    this.appendChild(newInput);
+                    // 获取input元素
+                    var inp = document.getElementsByClassName('tdinput');
+                    var _this = this;
+                    inp[0].onblur = function (){
+                        var inpVal = this.value;
+                        _this.innerHTML = inpVal;
+                        var name = inpVal;
+                        var id = $.trim(_this.parentNode.previousElementSibling.innerHTML);
+                        upd(id,name);
+                        lock = true;
+                    };
+                }
+            }
+            function upd(id,name)
+            {
+                ajax({
+                    method:'post',
+                    data:{id:id,name:name},
+                    url:'/admin/index/updblock',
+                    async:true,
+                    success:success
+                    /*type:'get',
+                    data:{id:id,name:name},
+                    url:'/admin/root/updrule',
+                    dataType:'json',
+                    success:success*/
+                });
+                function success(data){
+
+                }
+            }
+
+
+
+            /*-删除*/
+            function cate_del(obj,id){
+                layer.confirm('确认要删除吗？',function(index){
+                    //发异步删除数据
+                    $.ajax({
+                        type:'get',
+                        data:{bid:id},
+                        url:'/admin/index/delblock',
+                        dataType:'json',
+                        success:success
+                    });
+                    function success(data){
+                        //alert('删除成功');
+                    }
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                });
+            }
+            </script>
+            <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>

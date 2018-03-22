@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>注册页面</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Internship Sign In & Sign Up Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="/static/index/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="/static/index/css/snow.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/static/index/css/styletwo.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="/static/index/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/static/index/js/jquery-1.10.2.min.js"></script>
+<!-- <script type="text/javascript"> 
+			 $(function(){
+		 	$('#btn1').click(function(){
+		 		var phone=$('#dx').val();
+		 		data={
+		 			'phone':phone
+		 		}
+		 		$.post('index.php?m=user&a=duanxin',data,function(){
+		 			
+		 		})
+		 	})
+		 })
+
+			 function shuaxin() 
+			 { 
+			  document.getElementById('img').src = "index.php?m=user&a=verify&"+Math.random(); 
+			 } 
+</script> --> 
+</head>
+<body>
+<div class="snow-container">
+			  <div class="snow foreground"></div>
+			  <div class="snow foreground layered"></div>
+			  <div class="snow middleground"></div>
+			  <div class="snow middleground layered"></div>
+			  <div class="snow background"></div>
+			  <div class="snow background layered"></div>
+			</div>
+
+<div class="top-buttons-agileinfo">
+<a href="/index/user/login">登录</a><a href="/index/user/register" class="active">注册</a><a href="/index/index/index">返回</a>
+</div>
+<h1>注册页面</h1>
+<div class="main-agileits">
+<!--form-stars-here-->
+		<div class="form-w3-agile">
+			<h2 class="sub-agileits-w3layouts">注册</h2>
+			<form action="/index/user/doregister" method="post">
+					<input type="text" name="username" placeholder="用户名" required="" />
+					<input type="password" name="password" placeholder="密码" required="" />
+					<input type="password" name="pass" placeholder="确认密码" required="" />
+					<input type="text" name="email" placeholder="email" required="" >
+					<input style="width:590px;" name = "iphone" class="findmm_duanxin" type="text" id="phone" placeholder="手机号" required="">
+					<a style="color:#fff; " href='javascript:;'   id="getcode" onclick="getcode()">    
+						获取验证码
+					</a>
+					<input type="text" name="phone" placeholder="手机验证码" reqsuired="">
+					<span></span>
+				<div class="submit-w3l">
+					<input type="submit" value="Sign up">
+				</div>
+			</form>
+		</div>
+		</div>
+		<script type="text/javascript">
+		 function getcode()
+		  {
+			$('#getcode').text('60秒后重新获取');
+			
+			$('#getcode').removeAttr('onclick');
+			var phone = $('#phone').val();
+			
+			  //写个定时修改文本settime
+			var time = 59;
+			var into = setInterval(function(){
+			  $('#getcode').text(time+'秒后重新获取');
+			  time =time -1;
+			  if(time<=-1){
+				clearInterval(into);
+				$('#getcode').text('获取验证码');
+				$('#getcode').attr('onclick');
+			  }
+			},1000);
+			//ajax    参数1,url  index1.php   参数2, 数据   1234565432
+			$.get('/index/user/phoneyzm',{phone:phone},function(date){
+					  console.log(date);
+			});
+		  }
+		</script>
+		</script>
+<!--//form-ends-here-->
+<!-- copyright -->
+</body>
+</html>	

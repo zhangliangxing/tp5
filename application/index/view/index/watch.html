@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>牛逼的视频</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="/static/index/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- pop-up -->
+<link href="/static/index/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //pop-up -->
+<link href="/static/index/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
+<link rel="stylesheet" type="text/css" href="/static/index/css/zoomslider.css" />
+<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" />
+<link href="/static/index/css/font-awesome.css" rel="stylesheet"> 
+
+<link rel="stylesheet" href="depend/videoCT.css">
+<!-- <link rel="stylesheet" href="index.css"> -->
+
+<script type='text/javascript' src="/static/index/js/jquery.min.js"></script>
+<script type='text/javascript' src="/static/index/js/videoCT.js"></script>
+<script type="text/javascript" src="/static/index/js/modernizr-2.6.2.min.js"></script>
+  <meta name="description" content="A Template by Gozha.net">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="Gozha.net">
+    
+    <!-- Mobile Specific Metas-->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="telephone=no" name="format-detection">
+	
+
+
+        <style>
+			#geren{background:#fff2c7;width:218px;height:114px;position:absolute;right:-28px;top:55px;display:none;}
+			#geren .my{margin-top:64px;}
+			#geren .tubiao{margin-top:-3px;}
+			#geren ul li{float:left;padding-left:10px;}
+		</style>
+		<style>
+			.comment{
+				width: 1000px;
+			}
+			.commentbox{
+				width: 900px;
+				margin: 20px auto;
+			}
+			.mytextarea {
+			    width: 100%;
+			    overflow: auto;
+			    word-break: break-all;
+			    height: 100px;
+			    color: #000;
+			    font-size: 1em;
+			    resize: none;
+			}
+			.comment-list{
+				width: 900px;
+				margin: 20px auto;
+				clear: both;
+				padding-top: 20px;
+			}
+			.comment-list .comment-info{
+				position: relative;
+				margin-bottom: 20px;
+				margin-bottom: 20px;
+				border-bottom: 1px solid #ccc;
+			}
+			.comment-list .comment-info header{
+				width: 10%;
+				position: absolute;
+			}
+			.comment-list .comment-info header img{
+				width: 100%;
+				border-radius: 50%;
+				padding: 5px;
+			}
+			.comment-list .comment-info .comment-right{
+				padding:5px 0px 5px 11%; 
+			}
+			.comment-list .comment-info .comment-right h3{
+				margin: 5px 0px;
+			}
+			.comment-list .comment-info .comment-right .comment-content-header{
+				height: 25px;
+			}
+			.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span{
+				padding-right: 2em;
+				color: #aaa;
+			}
+			.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span.reply-btn,.send,.reply-list-btn{
+				cursor: pointer;
+			}
+			.comment-list .comment-info .comment-right .reply-list {
+				border-left: 3px solid #ccc;
+				padding-left: 7px;
+			}
+			.comment-list .comment-info .comment-right .reply-list .reply{
+				border-bottom: 1px dashed #ccc;
+			}
+			.comment-list .comment-info .comment-right .reply-list .reply div span{
+				padding-left: 10px;
+			}
+			.comment-list .comment-info .comment-right .reply-list .reply p span{
+				padding-right: 2em;
+				color: #aaa;
+			}
+     </style>
+	<script>
+	'user strict';
+
+window.onload = function () {
+
+    //初始化
+    var video = $('#video1').videoCt({
+        title: '动画',              //标题
+        volume: 0.2,                //音量
+        barrage: true,              //弹幕开关
+        comment: true,              //弹幕
+        reversal: true,             //镜像翻转
+        playSpeed: true,            //播放速度
+        update: true,               //下载
+        autoplay: false,            //自动播放
+        clarity: {
+            type: ['360P','480P'],            //清晰度
+            src: ['http://p3fczj25n.bkt.clouddn.com/4.MP4',
+                  'http://p3fczj25n.bkt.clouddn.com/4.MP4']      //链接地址
+        },
+        commentFile: 'comment.json'           //导入弹幕json数据
+    });
+
+    //扩展
+    video.title;                    //标题
+    video.status;                   //状态
+    video.currentTime;              //当前时长
+    video.duration;                 //总时长
+    video.volume;                   //音量
+    video.clarityType;              //清晰度
+    video.claritySrc;               //链接地址
+    video.fullScreen;               //全屏
+    video.reversal;                 //镜像翻转
+    video.playSpeed;                //播放速度
+    video.cutover;                  //切换下个视频是否自动播放
+    video.commentTitle;             //弹幕标题
+    video.commentId;                //弹幕id
+    video.commentClass;             //弹幕类型
+    video.commentSwitch;            //弹幕是否打开
+    $('#video1').bind('ended', function() {
+        console.log('弹幕json数据：\n'+ video.comment());              //获取弹幕json数据
+    });
+}
+</script>
+	<!-- <style>
+		* {
+		  margin: 0;
+		  padding: 0;
+		  border: 0;
+		  box-sizing: border-box;
+		}
+		section {
+		  position: fixed;
+		  width: 900px;
+		  height: 600px;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  margin: auto;
+		}
+
+	</style> -->
+	<script src="__JS1_PATH__/jquery.js"></script>	
+	<script src="__JS1_PATH__/mediaelement-and-player.min.js"></script>
+	<link rel="stylesheet" href="__CSS_PATH__/mediaelementplayer.min.css" />
+</head>
+<script>
+$(function(){
+
+	$('.orderby').eq(0).css({"background" : "red"});
+	$('.orderby').eq(1).css({"background" : "orange"});
+	$('.orderby').eq(2).css({"background" : "pink"});
+	
+	
+
+
+})
+</script>	
+
+
+<script>
+	//个人中心
+    $(function (){ 
+		   		 var timer=null; 
+		   		 $('#sns').mouseover(function (){ 
+					
+		   			 clearInterval(timer); 
+		   			 timer=setTimeout(function (){ 
+		   				 $('#geren').css({"display":"block"}); 
+		   			 } , 100); 
+
+
+		   		 }); 
+
+		   		 $('#sns').mouseout(function (){ 
+		   			clearInterval(timer); 
+		   			 timer=setTimeout(function (){ 
+		   				 $('#geren').css({"display":"none"}); 
+		   			 } , 100); 
+
+
+		   		 }); 
+
+		   		 $('#geren').mouseover(function (){ 
+		   	
+		   			 clearInterval(timer); 
+		   			 timer=setTimeout(function (){ 
+		   				 $('#geren').css({"display":"block"}); 
+		   			 } , 100); 
+
+
+		   		 });
+
+		   		 $('#geren').mouseout(function (){
+		   			clearInterval(timer); 
+		   			 timer=setTimeout(function (){ 
+		   				$('#geren').css({"display":"none"}); 
+		   			 } , 100);
+
+
+		   		 }); 
+		   }); 
+</script>
+
+<!--  <script src="__JS2_PATH__/layer.js"></script>
+	<script>
+	   $(function (){
+	   		$('#shoucang').click(function (){
+
+	   			var vid=$('#vid').val();
+	   			var username=$('#username').val();
+
+	   			//alert(vid);
+	   			params={
+
+	   				"username":username,
+	   				"vid":vid,
+	   			};
+
+	   			$.post('/index/Good/shoucang' , params , function (data){
+
+	   					if(data.status){
+
+	   						$('#shoucang').text(data.msg); 
+	   					} else {
+                             layer.msg(data.msg , {icon : 5 , shade: [0.8, '#ccc']});    //失败操作 
+	   					}
+
+	   			});
+
+	   		});
+	   });
+	</script> -->
+
+	<!-- 退出 -->
+<!-- <script>
+  $(function (){
+       $('#out').click(function(){          
+                        $.ajax({
+
+                            type:"POST",
+                            url:"/index/Auth/out",
+                            data:'',
+                            success:function(data){
+
+                                if(data.status == 0){
+
+                                }else{
+                                    // $('#sns').text('');
+                                     $('#sns').css({"display":"none"});
+                                     $('#denglu').css({"display":"block"});
+
+                                }
+                            }
+                        });
+
+                    });
+
+  });
+
+</script> -->
+<!-- 搜索 提示-->
+<script>  
+    $(function(){
+       var xhr=null;  
+        $('input[name="keyword"]').keyup(function() {  
+              if(xhr){  
+                  xhr.abort();//如果存在ajax的请求，就放弃请求  
+              }  
+            var inputText= $.trim(this.value);   
+            //alert(inputText);
+            if(inputText !='') {
+            xhr=$.ajax({  
+                type: 'POST',  
+                url: '/index/Index/search',  
+                cache:false,//不从浏览器缓存中加载请求信息  
+                data: "keyword=" + inputText,//向服务器端发送的数据  
+                dataType: 'json',//服务器返回数据的类型为json  
+                success: function (json) {  
+                    if (json.length != 0)  {  
+                        var lists = "<ul>";  
+                        $.each(json, function () {  
+                           /* lists += '<li><a href="/index/video/play.html?url='+this.url+'&vid='+this.vid+'">'+this.videoname+'</a></li>';*///遍历出每一条返回的数据  
+                            lists += "<li>" + this.videoname + "</li>";
+                        });  
+                        lists+="</ul>";  
+  
+                        $("#searchBox").html(lists).show();//将搜索到的结果展示出来  
+  
+                       $("li").click(function(){  
+                            
+                            /*var li=$("li").text();
+                            alert(li);*/
+                            //alert(1);
+                            $("#keyword").val($(this).text());//点击某个li就会获取当前的值  
+                            $("#searchBox").hide();  
+                        })  
+  
+                    } else {  
+                        $("#searchBox").hide();  
+                    }  
+  
+  
+                }  
+  
+            });  
+            }else{  
+                $("#searchBox").hide();//没有查询结果就隐藏搜索框  
+            }  
+        }).blur(function(){  
+            $("#searchBox").hide();//输入框失去焦点的时候就隐藏搜索框  
+        });  
+        
+ });     
+</script>  
+<body>
+
+<!--/main-header-->
+  <!--/banner-section-->
+	<div id="demo-1" data-zs-src='["/static/index/images/one.jpg", "/static/index/images/two.jpg", "/static/index/images/three.jpg","/static/index/images/four.jpg"]' data-zs-overlay="dots">
+		<div class="demo-inner-content">
+		<!--/header-w3l-->
+			   <div class="header-w3-agileits" id="home">
+			     <div class="inner-header-agile">	
+							<nav class="navbar navbar-default">
+								<div class="navbar-header">
+									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+										<span class="sr-only">Toggle navigation</span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</button>
+									<h1><a  href="index.html"><span>牛逼</span>视频网</a></h1>
+								</div>
+								<!-- navbar-header -->
+								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+										<ul class="nav navbar-nav">
+										<li class="dropdown-toggle"><a href="index.html">首页</a></li>
+										<!--遍历大板块-->
+										{if !empty($result)}
+										{foreach $result as $value}
+
+											<li class="dropdown">
+												<a href="/index/index/list" class="dropdown-toggle" data-toggle="dropdown">{$value['classname']}<b class="caret"></b></a>
+												<ul class="dropdown-menu multi-column columns-2" style="width:80px;background:pink;">
+													<li>
+													<div>
+														<ul class="multi-column-dropdown">
+															{foreach $rel as $val}
+															{if $value['bid'] == $val['pid']}
+															<li><a href="/index/index/list">{$val['classname']}</a></li>
+															{/if}
+															{/foreach}
+														</ul>
+													</div>
+						
+													
+													<div class="clearfix"></div>
+													</li>
+												</ul>
+											</li>
+										{/foreach}
+										{/if}
+									</ul>
+
+								</div>
+						<div class="clearfix"> </div>	
+						</nav>
+							<div class="w3ls_search">
+									<div class="cd-main-header">
+										<ul class="cd-header-buttons">
+											<li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+										</ul>
+									</div>
+									<div id="cd-search" class="cd-search">
+										<form action="#" method="post">
+											<input name="Search" type="search" placeholder="Search...">
+										</form>
+									</div>
+							</div>
+					</div> 
+			   </div>
+		</div>
+    </div>
+
+	         <!--/banner-bottom-->
+			  <div class="w3_agilits_banner_bootm">
+			     <div class="w3_agilits_inner_bottom">
+			            <div class="col-md-6 wthree_agile_login">
+						     <ul>
+									<!-- <li><i class="fa fa-phone" aria-hidden="true"></i> (+000) 009 455 4088</li> -->
+									{if empty($username)}
+									<li><a href="/index/user/login" class="login">登录</a></li>
+									<li><a href="/index/user/register" class="login reg">注册</a></li>
+									<li><a href="/index/user/found" class="login reg">忘记密码</a></li>
+									{else if}
+									<li><a href="#" class="login">{$username}</a></li>
+									<li><a href="/index/user/set" class="login reg">个人中心</a></li>
+									<li><a href="/index/user/exit" class="login reg">退出</a></li>
+									{/if}
+								</ul>
+						</div>
+						<!--  <div class="col-md-6 wthree_share_agile">
+									
+									<div class="single-agile-shar-buttons">
+									<ul>
+								<li>
+									<div class="fb-like" data-href="" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+									<script>(function(d, s, id) {
+									  var js, fjs = d.getElementsByTagName(s)[0];
+									  if (d.getElementById(id)) return;
+									  js = d.createElement(s); js.id = id;
+									  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7";
+									  fjs.parentNode.insertBefore(js, fjs);
+									}(document, 'script', 'facebook-jssdk'));</script>
+								</li>
+								<li>
+									<div class="fb-share-button" data-href="" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="">Share</a></div>
+								</li>
+								<li class="news-twitter">
+									<a href="" class="twitter-follow-button" data-show-count="false">Follow @w3layouts</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+								</li>
+								<li>
+									<a href=" class="twitter-mention-button" data-show-count="false">Tweet to @w3layouts</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+								</li>
+								<li> -->
+									<!-- Place this tag where you want the +1 button to render. -->
+									<!-- <div class="g-plusone" data-size="medium"></div> -->
+
+									<!-- Place this tag after the last +1 button tag. -->
+									<!-- <script type="text/javascript"> -->
+					<!-- 				  (function() {
+										var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+									  })();
+									</script>
+								</li>
+							</ul>
+								</div>
+						</div> -->
+				</div>
+			</div>
+			
+		<script src="/demos/googlegg.js"></script>
+
+<section>
+	<video width="100%" height="100%" id="video1"></video>
+</section>		
+	<!-- <div class="wrapper" style="height:700px;"> -->
+	<!-- 视屏+左侧热门列表+头部导航 -->
+	<div class="main" style="float:left;margin-top:10px;">
+	<!-- 当前位置 -->
+		<div style="width:900px;height:25px;float:left;margin-left:10px;margin-bottom:30px;">
+			 <p style="margin-left:10px;margin-bottom:10px;font-size:18px;">
+				 <span>当前位置：&nbsp;</span> 你正在观看>>{$cname}>>{$name}
+			 </p>
+		</div>
+		<!-- 热门top5 -->
+		<div class="list leftlist" style="width:230px;height:521px;float:right;margin-right:80px;margin-top:50px;">
+			<div style="width:228px;height:40px;border-bottom:1px solid #999; float:left;">
+			   <p style="font-size:20px;margin-left:0px;color:#555;">热门排行榜</p>
+			</div>
+	 
+			<ul style="float:left;margin-top:20px;padding-left:18px;">
+				
+				<li class="hot" style="border-bottom:1px solid #999;width:228px;height:40px;-background:#ccc;">
+					<span class="orderby" style="font-size:16px;display:inline-block;background:#ccc;color:white;width:20px;height:20px;text-align:center;line-height:20px;font-size:12px;" >1</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<font color="#F90" style="font-size:16px;">
+						<font color='#66B3FF'>哈哈</font>&nbsp;&nbsp;&nbsp;&nbsp;高清</font>
+					
+				</li>
+				
+			</ul>
+	    </div>
+
+		<!-- 播放 -->
+		<div style="width:910px;float:left;margin-top:10px;margin-left:20px;">
+
+	         <video width="900" height="500" src="" type="video/mp4" 
+		   id="player1" poster="" controls="controls" preload="none" style="background:#000;"></video>
+	    </div>
+  </div>
+</div>
+	
+
+	
+		
+		<div id="cyTvbarrage" role="cylabs" data-use="tvbarrage"></div>
+
+		
+	
+       <div style="width:900px;height:80px;margin-left:20px;margin-top:-100px;">
+  			
+				<div id="bdshare" class="bdshare_t bds_tools_32 	get-codes-bdshare">
+			    			<a class="bds_tsina"></a >
+			    			<a class="bds_qzone"></a >
+			    			<a class="bds_tqq"></a >
+			    			<a class="bds_renren"></a >
+			    			<span class="bds_more"></span>
+			    </div>
+				<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+				<script type="text/javascript" id="bdshell_js"></script> 
+				<script type="text/javascript">
+					document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+				</script> 
+		
+  			<input type="hidden" id="username" value="" />
+			<input type="hidden" id="vid" value="" />
+  		    <div style="float:right;margin-right:140px;font-size:15px;margin-top:0px;"><a style="font-size:18px;" href="javascript:;">观看数</a><span style="margin-left:5px;font-size:17px;color:#ccc;">21</span></div>
+		  <div style="float:right;margin-right:46px;font-size:15px;margin-top:0px;"><a style="font-size:18px;" href="javascript:;" id="shoucang">点击收藏</a></div>
+		  <div class="feed" id="feed2" style="width:80px;margin-right:20px;float:right;margin-top:-40px;height:80px;">
+			
+			<div class="heart" id="like2" rel="like"></div> <!-- <div class="likeCount" id="likeCount2"></div> -->
+			</div>
+	
+	</div> 
+
+	<div style="width:900px;height:80px;margin-left:20px;margin-top:10px;">
+		<p style="font-size:18px;margin-top:0px;margin-left:10px;">简介</p>
+		<p style="font-size:15px;margin-left:15px;margin-top:0px;">大的湿哒哒</p>
+	</div>
+		
+	<div style="width:880px;height:80px;margin-left:20px;margin-top:0px;">
+		<p style="font-size:18px;margin-top:0px;margin-left:10px;">评论区</p>
+
+	<div class="comment">
+	<div class="commentbox">
+		<textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
+		<div class="btn btn-info pull-right" id="comment">评论</div>
+	</div>
+	
+	
+</div>
+	
+</div>
+	
+	
+	<!-- <script src="__JS_PATH__/jquery.comment.js" ></script> -->
+
+	<script>
+	//初始化数据
+	var arr = [];
+	$(function(){
+		$(".comment-list").addCommentList({data:arr,add:""});
+		$("#comment").click(function(){
+
+			var username=$('#username').val();
+			var vid=$('#vid').val();
+			var content=$("#content").val();
+			var obj = new Object();
+			$.ajax({
+				"url":'/index/Video/comment',
+				"type":"POST",
+				"dataType":"json",
+				"async":true,
+				"data":{
+					"username":username,
+					"vid":vid,
+					"content":content,
+				},
+				success:function (data){
+
+						if(data.status){
+								obj.img=data.img;
+								obj.replyName=username;
+								obj.content=$("#content").val();
+								obj.browse="深圳";
+								obj.osname="win10";
+								obj.replyBody="";
+								$(".comment-list").addCommentList({data:[],add:obj});
+
+						} {
+						
+							 layer.msg(data.msg , {icon : 5 , shade: [0.8, '#ccc']});    //失败操作 
+						}
+				}
+
+			});
+
+
+			
+			
+		});
+	})
+	
+</script>
+	
+	<script>
+			$(document).ready(function()
+			{
+		    
+			$('body').on("click",'.heart',function()
+		    {
+		    	
+		    	var A=$(this).attr("id");
+		    	var B=A.split("like");
+		        var messageID=B[1];
+		        var C=parseInt($("#likeCount"+messageID).html());
+		        var vid=$('#vid').val();
+		        var username=$('#username').val();
+
+		    	$(this).css("background-position","")
+		        var D=$('#like2').attr("rel");
+
+		        //alert(D);
+		       
+		        if(D === 'like'){      
+			       
+
+			        params={"goodnum":C , "vid":vid , 'username':username};
+
+			        $.post('/index/Good/good' , params , function (data){
+
+			        		if(data.status == 1){
+			        			$("#likeCount"+messageID).html(C+1);
+			        			
+			        			$('#like2').removeClass("heartAnimation").attr("rel","unlike");
+			        		} else if(data.status == 2){
+			        			//alert(1);
+			        			$("#likeCount"+messageID).html(C-1);
+			        			$('#like2').removeClass("heartAnimation").attr("rel","like");
+			        				
+			        		} else {
+								 layer.msg(data.msg , {icon : 5 , shade: [0.8, '#ccc']});    //失败操作 
+									
+			        		}
+			        });  
+		    
+		        }
+		        else{
+
+
+		        	params={"goodnum":C , "vid":vid , 'username':username};
+
+			        $.post('/index/Good/delgood' , params , function (data){
+
+			        		if(data.status == 1){
+			        			 $("#likeCount"+messageID).html(C-1);
+			        			$('#like2').removeClass("heartAnimation").attr("rel","like");
+			        		   $(this).css("background-position","left");
+			        		} else if(data.status == 2){
+			        			//alert(1);
+			        			
+			        		 //alert($('#like2').attr("rel"));
+			        		} else {
+
+
+			        		}
+			        });   
+			       
+		        }
+
+
+		    });
+
+
+			});
+	</script>
+
+  
+<script>
+
+$('audio,video').mediaelementplayer({
+	//mode: 'shim',
+	success: function(player, node) {
+		$('#' + node.id + '-mode').html('mode: ' + player.pluginType);
+	}
+});
+
+</script>
+
+
+
+<script>
+$('#stopall').click(function() {
+    $('video, audio').each(function() {
+          $(this)[0].player.pause();		  
+    });
+});
+</script>
+
+
+<script src="/static/index/js/jquery-1.11.1.min.js"></script>
+	<!-- Dropdown-Menu-JavaScript -->
+			<script>
+				$(document).ready(function(){
+					$(".dropdown").hover(            
+						function() {
+							$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+							$(this).toggleClass('open');        
+						},
+						function() {
+							$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+							$(this).toggleClass('open');       
+						}
+					);
+				});
+			</script>
+		<!-- //Dropdown-Menu-JavaScript -->
+
+
+<script type="text/javascript" src="/static/index/js/jquery.zoomslider.min.js"></script>
+		<!-- search-jQuery -->
+				<script src="/static/index/js/main.js"></script>
+			<script src="/static/index/js/simplePlayer.js"></script>
+			<script>
+				$("document").ready(function() {
+					$("#video").simplePlayer();
+				});
+			</script>
+			<script>
+				$("document").ready(function() {
+					$("#video1").simplePlayer();
+				});
+			</script>
+			<script>
+				$("document").ready(function() {
+					$("#video2").simplePlayer();
+				});
+			</script>
+				<script>
+				$("document").ready(function() {
+					$("#video3").simplePlayer();
+				});
+			</script>
+
+			<!-- pop-up-box -->  
+		<script src="/static/index/js/jquery.magnific-popup.js" type="text/javascript"></script>
+	<!--//pop-up-box -->
+
+			<div id="small-dialog1" class="mfp-hide">
+			<iframe src=""></iframe>
+	</div>
+	<div id="small-dialog2" class="mfp-hide">
+		<iframe src=""></iframe>
+	</div>
+	<script>
+		$(document).ready(function() {
+		$('.w3_play_icon,.w3_play_icon1,.w3_play_icon2').magnificPopup({
+			type: 'inline',
+			fixedContentPos: false,
+			fixedBgPos: true,
+			overflowY: 'auto',
+			closeBtnInside: true,
+			preloader: false,
+			midClick: true,
+			removalDelay: 300,
+			mainClass: 'my-mfp-zoom-in'
+		});
+																		
+		});
+	</script>
+<script src="/static/index/js/easy-responsive-tabs.js"></script>
+<script>
+$(document).ready(function () {
+$('#horizontalTab').easyResponsiveTabs({
+type: 'default', //Types: default, vertical, accordion           
+width: 'auto', //auto or any width like 600px
+fit: true,   // 100% fit in a container
+closed: 'accordion', // Start closed if in accordion view
+activate: function(event) { // Callback function if tab is switched
+var $tab = $(this);
+var $info = $('#tabInfo');
+var $name = $('span', $info);
+$name.text($tab.text());
+$info.show();
+}
+});
+$('#verticalTab').easyResponsiveTabs({
+type: 'vertical',
+width: 'auto',
+fit: true
+});
+});
+</script>
+<link href="/static/index/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+<script src="/static/index/js/owl.carousel.js"></script>
+<script>
+	$(document).ready(function() { 
+		$("#owl-demo").owlCarousel({
+	 
+		 autoPlay: 3000, //Set AutoPlay to 3 seconds
+		  autoPlay : true,
+		   navigation :true,
+
+		  items : 5,
+		  itemsDesktop : [640,4],
+		  itemsDesktopSmall : [414,3]
+	 
+		});
+	 
+	}); 
+</script> 
+
+<!--/script-->
+<script type="text/javascript" src="/static/index/js/move-top.js"></script>
+<script type="text/javascript" src="/static/index/js/easing.js"></script>
+
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
+				});
+			});
+</script>
+ <script type="text/javascript">
+						$(document).ready(function() {
+						
+							
+							$().UItoTop({ easingType: 'easeOutQuart' });
+							
+						});
+					</script>
+<!--end-smooth-scrolling-->
+	<script src="/static/index/js/bootstrap.js"></script>
+
+ 
+
+</body>
+</html>
